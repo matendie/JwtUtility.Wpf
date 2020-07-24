@@ -1,0 +1,167 @@
+﻿<Window x:Class="TokenGenerator.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TokenGenerator.Wpf"
+        mc:Ignorable="d"
+        
+        Title="Token Generator" 
+        Height="632" 
+        Width="827"
+        MinHeight="632" 
+        MinWidth="827"
+        
+        
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+    <Window.Resources>
+        <Style x:Key="RoundButtonTemplate" TargetType="Button">
+            <Setter Property="Background" Value="#1b6ec2"/>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="3" Background="{TemplateBinding Background}"
+                                BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
+    </Window.Resources>
+    <Grid Margin="0,0,0,15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160" />
+            <ColumnDefinition MinWidth="320" />
+            <ColumnDefinition MinWidth="320" />
+            <ColumnDefinition Width="10" MinWidth="10" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="191" />
+            <RowDefinition Height="203*" />
+            <RowDefinition Height="207*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <Label x:Name="ErrorLabel" Grid.Column="0" Grid.Row="0" Content="" Foreground="Red" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.ColumnSpan="3" Width="798"/>
+
+        <ComboBox  x:Name="EnvironmentConfig" IsEditable="true" IsTextSearchEnabled="true" Grid.Row="1" Grid.Column="2" Margin="10,14,0,0" Height="22" VerticalAlignment="Top" SelectionChanged="EnvironmentConfig_SelectionChanged" HorizontalAlignment="Left" Width="309"></ComboBox>
+
+        <Label Grid.Row="1" Content="Cryptographic Key" HorizontalContentAlignment="Right" HorizontalAlignment="Center" Margin="0,7,0,0" VerticalAlignment="Top" Height="26" Width="140"/>
+        <TextBox Grid.Column="1"  Grid.Row="1" Grid.ColumnSpan="1"
+          x:Name="CryptographicKey"
+          TextWrapping="Wrap" 
+          VerticalScrollBarVisibility="Visible"
+            Margin="10,10,10,0" Height="80" VerticalAlignment="Top"
+        >jLMYzy3++qSySSU6rk1SoN1NYoKAPkmzG38j69J6GHsF4w823JOYzFW275LGvpBGtJHDA/Y5b01XDbDOtbG1Cw==
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <Label Grid.Row="1" Content="Not Before in Seconds" HorizontalContentAlignment="Right" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Height="26" Width="140"/>
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="NotBefore" Margin="10,140,10,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <Label Grid.Row="1" Content="Valid Issuer" HorizontalContentAlignment="Right" HorizontalAlignment="Center" Margin="0,90,0,0" VerticalAlignment="Top" Height="26" Width="140"/>
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="ValidIssuer" Margin="10,94,10,0" Text="https://t5.courseval.net" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"
+                 >
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Label Grid.Row="1" Content="Valid Audience" HorizontalContentAlignment="Right" HorizontalAlignment="Center" Margin="0,113,0,0" VerticalAlignment="Top" Height="26" Width="140"/>
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="ValidAudience" Margin="10,117,10,0" Text="https://localhost:44350/Manager" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"
+                 >
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Label Grid.Row="1"  Content="Expires in Seconds" HorizontalContentAlignment="Right" HorizontalAlignment="Center" Margin="0,159,0,0" VerticalAlignment="Top" Height="26" Width="140"/>
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="ExpiresInSeconds" Margin="10,163,10,0" Text="2000" TextWrapping="Wrap" Height="18" VerticalAlignment="Top">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+
+
+        <Label Content="Claims" HorizontalContentAlignment="Right" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26" Width="140"/>
+
+        <TextBox
+          x:Name="Claims"
+          TextWrapping="Wrap" 
+          Text="[{'type':'claimName', 'value':'claimValue'}, {'type':'claimName2', 'value':'claimValue2'}]"
+          VerticalScrollBarVisibility="Visible"
+          Margin="10,10,11,10" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+        >
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <Label Content="Token Result" HorizontalContentAlignment="Right" 
+               HorizontalAlignment="Center" Margin="0,10,0,0" 
+               VerticalAlignment="Top" Grid.Row="3" Height="26" Width="140"/>
+
+        <TextBox
+          x:Name="TokenResult"
+          TextWrapping="Wrap" 
+          VerticalScrollBarVisibility="Visible"
+          Margin="10,10,10,10" Grid.Row="3" Grid.Column="1"
+        >
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <Label Content="Token Claims" HorizontalAlignment="Left" Margin="237,11,0,0" VerticalAlignment="Top" Grid.Column="1" Height="6" Grid.Row="1" Width="0"/>
+        <TextBox
+            x:Name="TokenClaims"
+            TextWrapping="Wrap" 
+            VerticalScrollBarVisibility="Visible"
+            Margin="10,10,10,10" Grid.Column="2" Grid.Row="3"
+        >
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <Button x:Name="CreateTokenBtn" Style="{StaticResource RoundButtonTemplate}" Content="Create Token" Margin="0,0,10,0" Click="CreateTokenBtn_Click" Height="30" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Width="112" />
+        <Button x:Name="ValidateTokenBtn" Style="{StaticResource RoundButtonTemplate}" Content="Validate Token" Margin="10,0,0,0" Height="30" VerticalAlignment="Center" Grid.Row="4" Click="ValidateTokenBtn_Click" Grid.Column="2" HorizontalAlignment="Left" Width="112" />
+        <Button x:Name="SaveEnvBtn" Style="{StaticResource RoundButtonTemplate}" Content="Save Env" Margin="206,41,0,0" Grid.Row="1"  Grid.Column="2" Click="SaveEnvBtn_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112" />
+        <Button x:Name="DeleteEnvBtn" Style="{StaticResource RoundButtonTemplate}" Content="Delete Env" Margin="88,41,0,0" Grid.Row="1"  Grid.Column="2" Click="DeleteEnvBtn_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="113" />
+        <Button x:Name="ClearTokenBtn" Style="{StaticResource RoundButtonTemplate}" Content="Clear Token" Margin="0,0,126,0" Grid.Row="4"  Grid.Column="1" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Width="112" Click="ClearTokenBtn_Click" UseLayoutRounding="False" />
+        <Button x:Name="CreateKeyBtn" Style="{StaticResource RoundButtonTemplate}" Content="Create Key" Margin="37,35,0,0" Grid.Row="1"  Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="113" Click="CreateKeyBtn_Click" />
+
+    </Grid>
+
+
+</Window>
