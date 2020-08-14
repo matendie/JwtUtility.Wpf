@@ -51,6 +51,12 @@ namespace TokenGenerator.Wpf
             EnvironmentConfig.ItemsSource = comboBoxList;
             EnvironmentConfig.SelectedIndex = 0;
 
+            SecurityKeyBtn.Visibility = Visibility.Hidden;
+            CreateSecureTokenBtn.Visibility = Visibility.Hidden;
+            ValidateSecureTokenBtn.Visibility = Visibility.Hidden;
+            SecurityKey.Visibility = Visibility.Hidden;
+            SecurityKeyLbl.Visibility = Visibility.Hidden;
+
             LoadViewData();
         }
 

@@ -37,6 +37,11 @@ namespace TokenGenerator.Wpf
             ExpiresInSeconds.Text = environmentData[EnvironmentConfig.SelectedIndex].ExpirationInSeconds.ToString();
             NotBefore.Text = environmentData[EnvironmentConfig.SelectedIndex].NotBeforeInSeconds.ToString();
             Claims.Text = JsonConvert.SerializeObject(environmentData[EnvironmentConfig.SelectedIndex].StringClaims);
+            SecurityKey.Text = environmentData[EnvironmentConfig.SelectedIndex].SecurityKey;
+             
+            ValidateAudienceChk.IsChecked = environmentData[EnvironmentConfig.SelectedIndex].ValidateAudience;
+            ValidateIssuerChk.IsChecked = environmentData[EnvironmentConfig.SelectedIndex].ValidateIssuer;
+            ValidateExpirationChk.IsChecked = environmentData[EnvironmentConfig.SelectedIndex].ValidateExpiration; 
         }
 
         private EnvironmentData GetDataModel(int selectedIndex)
@@ -45,11 +50,17 @@ namespace TokenGenerator.Wpf
             newEnvironmentData.DisplayName = EnvironmentConfig.Text;
             newEnvironmentData.Id = selectedIndex;
             newEnvironmentData.CryptoKey = CryptographicKey.Text;
+            newEnvironmentData.SecurityKey = SecurityKey.Text;
             newEnvironmentData.ValidIssuer = ValidIssuer.Text;
             newEnvironmentData.ValidAudience = ValidAudience.Text;
             newEnvironmentData.ExpirationInSeconds = Int32.Parse(ExpiresInSeconds.Text);
             newEnvironmentData.NotBeforeInSeconds = Int32.Parse(NotBefore.Text);
             newEnvironmentData.StringClaims = JsonConvert.DeserializeObject<List<Claims>>(Claims.Text);
+             
+            newEnvironmentData.ValidateAudience = ValidateAudienceChk.IsChecked;
+            newEnvironmentData.ValidateIssuer = ValidateIssuerChk.IsChecked;
+            newEnvironmentData.ValidateExpiration = ValidateExpirationChk.IsChecked; 
+
             return newEnvironmentData;
         }
     }

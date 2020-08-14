@@ -1,11 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,22 +8,52 @@ namespace TokenGenerator.Wpf
 {
     public partial class MainWindow : Window
     {
-        private void CreateKeyBtn_Click(object sender, RoutedEventArgs e)
+        private void ValidateIssuerChk_Checked(object sender, RoutedEventArgs e)
         {
-            using (var rsa = new RSACryptoServiceProvider(2048))
-            {
-                var stringChars = new char[64];
-                var random = new Random();
-                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
+            
+        }
 
-                for (int i = 0; i < stringChars.Length; i++)
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+            {
+
+        }
+
+        private void ValidateExpirationChk_Checked(object sender, RoutedEventArgs e)
                 {
-                    stringChars[i] = (char)chars[random.Next(chars.Length)];
+
                 }
 
-                var finalString = new String(stringChars);
-                CryptographicKey.Text = Convert.ToBase64String(Encoding.ASCII.GetBytes(finalString));
+        private void UseSecureTokenChk_Checked(object sender, RoutedEventArgs e)
+        {
+            SecurityKeyBtn.Visibility = Visibility.Visible;
+            CreateSecureTokenBtn.Visibility = Visibility.Visible;
+            ValidateSecureTokenBtn.Visibility = Visibility.Visible;
+            SecurityKey.Visibility = Visibility.Visible;
+            SecurityKeyLbl.Visibility = Visibility.Visible;
+            CreateTokenBtn.Visibility = Visibility.Hidden;
+            ValidateTokenBtn.Visibility = Visibility.Hidden;
+        }
+
+        private void UseSecureTokenChk_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SecurityKeyBtn.Visibility = Visibility.Hidden;
+            CreateSecureTokenBtn.Visibility = Visibility.Hidden;
+            ValidateSecureTokenBtn.Visibility = Visibility.Hidden;
+            SecurityKey.Visibility = Visibility.Hidden;
+            SecurityKeyLbl.Visibility = Visibility.Hidden;
+
+            CreateTokenBtn.Visibility = Visibility.Visible;
+            ValidateTokenBtn.Visibility = Visibility.Visible;
+        }
+ 
+        private void CreateKeyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CryptographicKey.Text = CipherService.GenerateSecureKey(256 * 2);
             }
+
+        private void SecurityKeyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SecurityKey.Text = CipherService.GenerateSecureKey(512 * 2);
         }
 
         private void EnvironmentConfig_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -125,9 +150,9 @@ namespace TokenGenerator.Wpf
                 var result = _jwtService.GenerateJSONWebToken(CryptographicKey.Text, Claims.Text, ValidAudience.Text, ValidIssuer.Text, NotBefore.Text, ExpiresInSeconds.Text);
                 TokenResult.Text = result;
             }
-            catch (Exception)
+            catch (Exception exc)
             {
-                ErrorLabel.Content = "Can't create given token...";
+                ErrorLabel.Content = "Can't create given token..." + exc.Message;
             }
 
         }
@@ -135,11 +160,13 @@ namespace TokenGenerator.Wpf
         private void ValidateTokenBtn_Click(object sender, RoutedEventArgs e)
         {
             ErrorLabel.Content = "";
+            TokenClaims.Text = "";
             try
             {
                 if (TokenResult.Text != null || TokenResult.Text != "")
                 {
-                    TokenClaims.Text = _jwtService.GetClaims(_jwtService.ValidateToken(TokenResult.Text, ValidAudience.Text, ValidIssuer.Text, CryptographicKey.Text) as ClaimsPrincipal);
+                    TokenClaims.Text = _jwtService.GetClaims(_jwtService.ValidateToken(TokenResult.Text, ValidAudience.Text, ValidIssuer.Text, CryptographicKey.Text,
+                                                        ValidateAudienceChk.IsChecked, ValidateIssuerChk.IsChecked, ValidateExpirationChk.IsChecked) as ClaimsPrincipal);
                 }
             }
             catch (Exception exc)
@@ -147,6 +174,38 @@ namespace TokenGenerator.Wpf
                 ErrorLabel.Content = "Can't validate given token... " + exc.Message;
             }
 
+        }
+
+        private void CreateSecureTokenBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ErrorLabel.Content = "";
+                var result = _jwtService.GenerateJSONSecureWebToken(CryptographicKey.Text, SecurityKey.Text, Claims.Text, ValidAudience.Text, ValidIssuer.Text, NotBefore.Text, ExpiresInSeconds.Text);
+                TokenResult.Text = result;
+            }
+            catch (Exception exc)
+            {                
+                ErrorLabel.Content = "Can't create given token..." + exc.Message;
+            }
+        }
+
+        private void ValidateSecureTokenBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ErrorLabel.Content = "";
+            TokenClaims.Text = "";
+            try
+            {
+                if (TokenResult.Text != null || TokenResult.Text != "")
+                {
+                    TokenClaims.Text = _jwtService.GetClaims(_jwtService.ValidateSecureToken(TokenResult.Text, ValidAudience.Text, ValidIssuer.Text, CryptographicKey.Text, SecurityKey.Text,
+                                                        ValidateAudienceChk.IsChecked, ValidateIssuerChk.IsChecked, ValidateExpirationChk.IsChecked) as ClaimsPrincipal);
+                }
+            }
+            catch (Exception exc)
+            {
+                ErrorLabel.Content = "Can't validate given token... " + exc.Message;
+            }
         }
     }
 }
