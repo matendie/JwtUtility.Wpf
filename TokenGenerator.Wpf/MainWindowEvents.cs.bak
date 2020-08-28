@@ -48,7 +48,7 @@ namespace TokenGenerator.Wpf
  
         private void CreateKeyBtn_Click(object sender, RoutedEventArgs e)
         {
-            CryptographicKey.Text = CipherService.GenerateSecureKeyString(256 * 2);
+            CryptographicKey.Text = CipherService.GenerateSecureKey(256 * 2);
             }
 
         private void SecurityKeyBtn_Click(object sender, RoutedEventArgs e)

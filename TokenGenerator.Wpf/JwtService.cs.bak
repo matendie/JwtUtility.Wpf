@@ -182,17 +182,7 @@ namespace TokenGenerator.Wpf
             {
                 foreach (Claim claim in user.Claims)
                 {
-                    if (claim.Type == "exp" || claim.Type == "nbf")
-                    {
-                        var epochDate = DateTime.Parse("01/01/1970");
-                        result += "CLAIM TYPE: " + claim.Type + "; CLAIM VALUE: " + claim.Value  + 
-                            ", utc: "+ epochDate.AddSeconds(Int32.Parse(claim.Value)) + 
-                            ", loc: " + epochDate.AddSeconds(Int32.Parse(claim.Value)).ToLocalTime() + '\r';                        
-                    }
-                    else
-                    {
                     result += "CLAIM TYPE: " + claim.Type + "; CLAIM VALUE: " + claim.Value + '\r';
-                    }
                 }
             }
             return result;

@@ -20,8 +20,7 @@ namespace TokenGenerator.Wpf
         {
             var result = new byte[bits / 8];
             RandomNumberGenerator.Create().GetBytes(result);
-            var key = Convert.ToBase64String(result);
-            return key;
+            return Convert.ToString(result);
         }
 
         public static string Encrypt(this string text, string key)

@@ -32,40 +32,6 @@
             </Setter>
         </Style>
 
-        <Style x:Key="RoundButtonRedTemplate" TargetType="Button">
-            <Setter Property="Background" Value="#CE3333"/>
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="3" Background="{TemplateBinding Background}"
-                                BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
-
-                            </ContentPresenter>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="RoundButtonGreenTemplate" TargetType="Button">
-            <Setter Property="Background" Value="#088719"/>
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="3" Background="{TemplateBinding Background}"
-                                BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
-
-                            </ContentPresenter>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
 
     </Window.Resources>
     <Grid Margin="0,0,0,15">
@@ -92,8 +58,8 @@
           x:Name="CryptographicKey"
           TextWrapping="Wrap" 
           VerticalScrollBarVisibility="Visible"
-            Margin="10,10,10,0" Height="58" VerticalAlignment="Top" 
-        >VGhPX2dmUTVnbWc1UTRuUDNBamRkNGJsS2xOM1dSclhtcU8ublIwNW1MNU82TFRJUGx2Rk94WGNGcjE4U2JqTw==
+            Margin="10,10,10,0" Height="58" VerticalAlignment="Top"
+        >jLMYzy3++qSySSU6rk1SoN1NYoKAPkmzG38j69J6GHsF4w823JOYzFW275LGvpBGtJHDA/Y5b01XDbDOtbG1Cw==
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="3"/>
@@ -111,7 +77,7 @@
         </TextBox>
 
         <Label Grid.Row="1" Content="Valid Issuer" HorizontalContentAlignment="Right" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Height="26" Width="140"/>
-        <TextBox Grid.Column="1" Grid.Row="1" x:Name="ValidIssuer" Margin="9,140,10,0" Text="https://subdomain.domain.com" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="ValidIssuer" Margin="9,140,10,0" Text="https://t5.courseval.net" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"
                  >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -120,7 +86,7 @@
             </TextBox.Resources>
         </TextBox>
         <Label Grid.Row="1" Content="Valid Audience" HorizontalContentAlignment="Right" HorizontalAlignment="Center" Margin="0,159,0,0" VerticalAlignment="Top" Height="26" Width="140"/>
-        <TextBox Grid.Column="1" Grid.Row="1" x:Name="ValidAudience" Margin="9,163,10,0" Text="https://test.audience.com/path" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="ValidAudience" Margin="9,163,10,0" Text="https://localhost:44350/Manager" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"
                  >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -188,8 +154,8 @@
 
         <Button x:Name="CreateTokenBtn" Style="{StaticResource RoundButtonTemplate}" Content="Create Token" Margin="0,0,10,0" Click="CreateTokenBtn_Click" Height="30" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Width="112" />
         <Button x:Name="ValidateTokenBtn" Style="{StaticResource RoundButtonTemplate}" Content="Validate Token" Margin="10,0,0,0" Height="30" VerticalAlignment="Center" Grid.Row="4" Click="ValidateTokenBtn_Click" Grid.Column="2" HorizontalAlignment="Left" Width="112" />
-        <Button x:Name="SaveEnvBtn" Style="{StaticResource RoundButtonGreenTemplate}" Content="Save Env" Margin="130,38,0,0" Grid.Row="1"  Grid.Column="2" Click="SaveEnvBtn_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112" />
-        <Button x:Name="DeleteEnvBtn" Style="{StaticResource RoundButtonRedTemplate}" Content="Delete Env" Margin="10,38,0,0" Grid.Row="1"  Grid.Column="2" Click="DeleteEnvBtn_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="114" />
+        <Button x:Name="SaveEnvBtn" Style="{StaticResource RoundButtonTemplate}" Content="Save Env" Margin="130,39,0,0" Grid.Row="1"  Grid.Column="2" Click="SaveEnvBtn_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112" />
+        <Button x:Name="DeleteEnvBtn" Style="{StaticResource RoundButtonTemplate}" Content="Delete Env" Margin="10,38,0,0" Grid.Row="1"  Grid.Column="2" Click="DeleteEnvBtn_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="114" />
         <Button x:Name="ClearTokenBtn" Style="{StaticResource RoundButtonTemplate}" Content="Clear Token" Margin="38,41,0,0" Grid.Row="3" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112" Click="ClearTokenBtn_Click" UseLayoutRounding="False" />
         <Button x:Name="CreateKeyBtn" Style="{StaticResource RoundButtonTemplate}" Content="New Signing Key" Margin="0,38,0,0" Grid.Row="1" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Width="140" Click="CreateKeyBtn_Click" />
         <CheckBox x:Name="ValidateIssuerChk" Content="Validate Issuer" Grid.Column="2" HorizontalAlignment="Left" Margin="10,141,0,0" Grid.Row="1" VerticalAlignment="Top" Checked="ValidateIssuerChk_Checked" Height="15" Width="96"/>
@@ -200,7 +166,7 @@
             TextWrapping="Wrap" 
             VerticalScrollBarVisibility="Visible"
             Margin="10,74,10,0" Height="58" VerticalAlignment="Top"
-            Text="zGUP2A/HEwnTHqGR"
+            Text="jLMYzy3++qSySSU6rk1SoN1NYoKAPkmzG38j69J6GHsF4w823JOYzFW275LGvpBGtJHDA/Y5b01XDbDOtbG1Cw=="
         >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -213,7 +179,7 @@
         
         <Button x:Name="CreateSecureTokenBtn" Style="{StaticResource RoundButtonTemplate}" Content="Create Secure Token" Margin="0,0,10,0"  Height="30" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Click="CreateSecureTokenBtn_Click" HorizontalAlignment="Right" Width="130" />
         <Button x:Name="ValidateSecureTokenBtn" Style="{StaticResource RoundButtonTemplate}" Content="Validate Secure Token" Margin="10,0,0,0" Height="30" VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Width="136" Click="ValidateSecureTokenBtn_Click" />
-        <CheckBox IsChecked="False" x:Name="UseSecureTokenChk" Content="Use Secure Token" Foreground="#CE3333" Grid.Column="2" HorizontalAlignment="Left" Margin="10,117,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="198" Checked="UseSecureTokenChk_Checked" Unchecked="UseSecureTokenChk_Unchecked"/>
+        <CheckBox IsChecked="False" x:Name="UseSecureTokenChk" Content="Use Secure Token" Grid.Column="2" HorizontalAlignment="Left" Margin="10,75,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="198" Checked="UseSecureTokenChk_Checked" Unchecked="UseSecureTokenChk_Unchecked"/>
 
     </Grid>
 
